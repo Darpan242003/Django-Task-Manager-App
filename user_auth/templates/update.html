@@ -1,0 +1,22 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+<center>
+    <h1>Update Profile</h1>
+    {% if pw_mismatch %}
+    <h4 style="color:red">Password doesn't match! Enter Again</h4>
+    {% endif %}
+    
+    <form action="" method="POST">
+        {% csrf_token %}
+        <input type="text" name="first_name" id="" placeholder="First Name" value="{{user.first_name}}"><br>
+        <input type="text" name="last_name" id="" placeholder="Last Name" value="{{user.last_name}}"><br>
+        <input type="email" name="email" id="" placeholder="Email Address" value="{{user.email}}"><br>
+        <input type="text" name="username" id="" placeholder="Username" value="{{user}}"><br>
+        <button type="submit">Update</button>
+    </form>
+
+</center>
+
+{% endblock content %}
