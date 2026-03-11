@@ -21,7 +21,6 @@ def user_login(request):
     return render(request, 'login.html')
 
 def register(request):
-    #add username already exists logic
     if request.method == "POST":
         firstname = request.POST['first_name']
         lastname = request.POST['last_name']
@@ -29,6 +28,9 @@ def register(request):
         username = request.POST['username']
         password = request.POST['password']
         confirm_password = request.POST['confirm_password']
+        
+        if User.objects.filter(username=username).exists():
+            return render(request, 'register.html', {'user_error':'True'})
 
         if password == confirm_password:
             user = User.objects.create(
@@ -41,6 +43,8 @@ def register(request):
 
             user.set_password(password)
             user.save()
+
+            login(request, user)
             return redirect('profile')
         else:
             return render(request, 'register.html', {'pw_mismatch': True})

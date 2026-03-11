@@ -8,6 +8,10 @@
     {% if pw_mismatch %}
     <h4 style="color:red">Password doesn't match! Enter Again</h4>
     {% endif %}
+
+    {% if user_error %}
+    <h4 style="color:red">Username already exists, use another username.</h4>
+    {% endif %}
     
     <form action="" method="POST">
         {% csrf_token %}
